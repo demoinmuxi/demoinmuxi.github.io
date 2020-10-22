@@ -126,10 +126,10 @@
     </span>
 </div>
 <div class="kk kb3">
-    <div class="teache white">
+    <div class="teache">
         张勇
             </div>
-            <div class="cours white">
+            <div class="cours">
         《java语言程序设计》
             </div>
 </div>
@@ -628,6 +628,7 @@
     var temp;
         list=document.querySelectorAll(".list"),
         li=document.querySelectorAll("li");
+    var kee=document.querySelectorAll(".kk");
     t1.onclick=function(){
         t2.style.borderTop='none';
         t2.style.color='#000';
@@ -672,6 +673,24 @@
             this.querySelector(".courseName").style.color='rgb(244, 67, 54)';
             this.querySelector(".teacher").style.color='rgb(244, 67, 54)';
             this.style.listStyle='url(ryd.png)';
+
+        }
+        
+    }
+    kee[2].querySelector(".cours").style.color="rgb(255,255,255)";
+    kee[2].querySelector(".teache").style.color="rgb(255,255,255)";
+    for (var i =0;i < kee.length;i+=2) {
+        kee[i].style.cursor='pointer';
+        kee[i].onclick=function(){
+            for (var j = 0; j < kee.length; j+=2) {
+                kee[j].querySelector(".cours").style.color='rgb(99,99,99)';
+                kee[j].querySelector(".teache").style.color='rgb(99,99,99)';
+                kee[j].style.background='rgb(255,255,255)';
+            }
+            // m[temp].style.visibility='visible';
+            this.querySelector(".cours").style.color='rgb(255, 255, 255)';
+            this.querySelector(".teache").style.color='rgb(255, 255, 255)';
+            this.style.background="rgb(50,198,155)";
 
         }
         
