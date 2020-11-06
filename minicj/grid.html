@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+   
+</head>
+<body>
+    <div class="w">
+        <div v-for="(it,i) in list" :class="i==inde?cl1:''" :style="{border:'1px solid white'}">
+            <img :src="it.img" alt="" :style='sty'>
+            <div :style='di'>{{it.title}}</div>
+        </div>
+        <div v-for='(i,inda) in map' :class="(inda+11)==inde?cl1:''" :style='[{di},{width:"98px",height:"98px",border:"1px solid black"}]' >{{i.n+'\n'+"我是工具奖项因为没有图了"}}</div>
+        <div class="con" :style="{}">
+            <chou-jiang>
+                {{text1}}
+                <template slot="p1">
+
+                    <button class="butt" :style="ss[ind]" @click="ht"></button>
+                </template>
+            </chou-jiang>
+        </div>
+    </div>
+    <div class="record">
+        <div v-for="i in reco">
+{{"第"+i.no+"次抽奖结果是-----"+i.jiangp}}
+        </div>
+
+    </div>
+</body>
+<style>
+.bord{
+    border: 1px solid green;
+    background-color: khaki;
+}
+.butt{
+    display: block;
+    width: 100px;
+    height: 100px;
+    outline: none;
+    border: 2px solid burlywood;
+    border-radius: 50%;
+    margin: auto auto;
+    cursor: pointer;
+}
+.w{
+        margin: auto auto;
+    }
+.con{
+        grid-area: 2/2/4/4;
+    }
+    .w{
+        width: 400px;
+        height: 400px;
+        display: grid;
+        grid-template-columns: repeat(4,100px);
+        grid-template-rows: repeat(4,100px);
+    }
+    .box{
+        margin: 1px;
+    }
+</style>
+<script src="g.js"></script>
+</html>
