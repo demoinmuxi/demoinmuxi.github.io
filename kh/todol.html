@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body onselectstart ='return false'>
+ <div id='todo'>
+     <h1>The To Do List</h1>
+     <div>Use CSS and JavaScript to create a "to-do list" to organize and prioritize your tasks.</div>
+     <div class="inputred">
+         <div class="zhanwei"></div>
+         <div class="text1">My To Do List</div>
+         <div class="shuru">
+              <input type="search" name="" id="search" spellcheck="false" @keyup.enter="add" placeholder="Title..." v-model='text1'>
+         <button class='add' @click="add">Add</button>
+         <div id="js" style="font-size: xx-small;" :class="aaa?'a':'b'">已选中 {{select}}个，未选中{{count-select}}个</div>
+        <button :class="aaa?'a':'b'" @click="delall" id="delii">全部删除</button>
+        <!-- <button class="a" @click="deleteall">全选</button> -->
+        </div>  
+     </div>
+     <div class="listarea">
+         <div v-for="(i,index) in todolistvalue">
+             <list-todo :title='i.t' :class='i.addit?"hidit1":"showit1"' ></list-todo>
+         </div>
+     </div>
+
+
+ </div>   
+</body>
+<script>
+      var eles=document.querySelectorAll(".deleteline");
+      var melength=eles.length;
+    var map=document.querySelector(".listarea");
+    var count=document.querySelector("#js");
+      Vue.component("list-todo",{
+        props:['title'],
+        data:function() {
+            return {
+                del:false,
+                tt:0,
+                editc:true,
+                // xuh,
+                t:false,
+                colors:[
+                    'rgb(249,249,249)','rgb(136,136,136)','rgb(221,221,221)','rgb(238,238,238)'
+                ]
+            };
+        },
+        methods: {
+            deal:function(){
+                
+                // count.innerHTML="选中"+select+"个,未选"+(v.num-select)+"个";
+                if (this.t) {
+                    this.t=false;
+                    this.tt=0;
+                    v.select--;
+                    v.aaa--;
+                }else{
+                    this.t=true;
+                    this.tt=1;
+                    v.select++;
+                    v.aaa++;
+                    // select.push()
+                }
+                
+                
+            },
+            non:function(){
+                this.del=true;
+                 v.count--;
+                if (this.t==false) {
+                   
+                }else{
+
+                    v.select--;
+                }
+                if (v.select==0) {
+            //         var self=document.querySelector("#delii");
+            // var self1=document.querySelector("#js");
+
+            // self.style.display='none';
+            // self1.style.display="none";
+            v.aaa=0;
+                }
+                
+            },
+            fn:function(){
+            }
+        
+        },
+        template:`
+        <div :style="{background:colors[tt]}" :class='del?"noneit":""' >
+            <span style="display:inline-block;width:5vw;height:43px;lineHeight:43px;fontSize:20px;cursor: pointer; " :class='t?"showit":"hidit"' @click='deal' :class='del?"noneit":""' >
+                √
+                </span>
+           
+<input type="text"  spellCheck="false" :value="title" onselectstart ='return true' style="background: transparent;display:none;outline: none;border: none;cursor: pointer;width:67vw;display:inline-block;height:43px;fontSize:20px;lineHeight:43px" :class='t?"deleteline":""'>
+                
+          
+               
+                
+                <span style="display:inline-block;width:5vw;height:43px;lineHeight:43px;fontSize:20px;cursor: pointer;textAlign:center" @click.stop="non">×</span>
+            </div>
+        `
+    });
+    //    <div   style="cursor: pointer;width:67vw;display:inline-block;height:43px;fontSize:20px;lineHeight:43px" :class='[t?"deleteline":""]' @dbclick="fn">
+    // <input type="text" v-model="title" :value="title" onselectstart ='return true' style="display:none;outline: none;border: none;cursor: pointer;;width:67vw;display:inline-block;height:43px;fontSize:20px;lineHeight:43px" :class='t?"deleteline":""'>
+    var v=new Vue({
+    el:"#todo",
+    data:{
+        // t:true,
+        aaa:0,
+        select:0,
+        target1:"挣它一个亿",
+        num:0,
+        count:0,
+        todolistvalue:[{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0}
+        ,{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0}
+        ,{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0},{t:"1",addit:true,id:0}],
+        text1:"",
+    },
+    methods:{
+        add:function(){
+            var s=this;
+            s.todolistvalue[s.num].t=s.text1;
+            s.todolistvalue[s.num].addit=false;
+            s.todolistvalue[s.num].id=s.num;
+            s.num++;s.count++;
+
+        },
+        delall:function(){ 
+            
+            eles=document.querySelectorAll(".deleteline");
+           var nowlength=eles.length;
+            for (var i = 0; i < eles.length; i++) {
+                eles[i].parentElement.style.display="none";    
+            }
+            this.select-=eles.length-melength;
+            this.count-=eles.length-melength;
+            melength=nowlength;
+            // var self=document.querySelector("#delii");
+            // var self1=document.querySelector("#js");
+
+            // self.style.display='none';
+            // self1.style.display="none";
+            this.aaa=0;
+
+        },
+        // deleteall:function(){
+        //     var doc=document.querySelectorAll("input");
+        //     for (var i = 1; i < num+1; i++) {
+        //         doc[i].parentElement.style.display="none";
+        //         // eles[i].parentElement.parentElement.style.background="tomato";
+
+        //     }
+        // }
+      
+        
+    }
+});
+</script>
+<link rel="stylesheet" href="todolist.css">
+</html>

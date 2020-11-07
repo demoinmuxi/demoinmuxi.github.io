@@ -1,0 +1,101 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.editclass{
+    display: none;
+    
+}
+.noneit{
+    display: inline-block;
+}
+.a{
+    display: block;
+    margin: 5px auto;
+    font-size: 10px;
+    color: tomato;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+.b{
+    display: none;
+}
+.showit1{
+     display: block;
+}
+.hidit1{
+    display: none;
+}
+.listarea{
+    overflow: scroll;
+    height: 70vh;
+}
+.noneit{
+    display: none;
+}
+.showit{
+   visibility: visible;
+}
+.hidit{
+    visibility: hidden;
+}
+.deleteline{
+    /* color: white; */
+    text-decoration: line-through;
+}
+#todo{
+    width: 80vw;
+    height: 100vh;
+    margin: 0 auto;
+}
+.shuru{
+    max-width: 80vw;
+    width: 80vw;
+    height: 43px;
+    margin: 0 auto;
+    text-align: center;
+}
+.zhanwei{
+    height: 20px;
+    width: 80vw;
+}
+.text1{
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    font-size: 40px;
+    white-space: nowrap;
+    color: white;
+    margin: 10px auto;
+    margin-top: 15px;
+}
+.inputred{
+    width: 80vw;
+    height: 200px;
+    background-color: rgb(244, 67, 54);
+    margin-top: 10px;
+}
+.add{
+    width:18vw;
+    height: 43px;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    line-height: 43px;
+    vertical-align: top;
+    margin-left: -8px;
+}
+#search{
+    display: inline-block;
+    width: 52vw;
+    height: 43px;
+    outline: none;
+    font-size: 20px;
+    line-height: 43px;
+    border: none;
+}
+h1{
+    margin-bottom: 20px;
+}
