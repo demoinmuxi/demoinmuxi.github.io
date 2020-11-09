@@ -1,0 +1,151 @@
+*{
+    margin: 0;
+    padding: 0;
+    white-space:nowrap!important;
+    overflow: hidden !important;
+    font-family: cursive;
+}
+[v-cloak]{
+    display: none;
+}
+h1{
+    width: 80vw;
+    text-align: center;
+    font-size: 40px;
+    height: 60px;
+    margin: 20px auto;
+    border: 1px solid tan;
+    white-space: nowrap;
+}
+span{
+    margin-left: 5px;
+}
+a{
+    background-color: thistle;
+    border: 1px solid ivory;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 2px 2px;
+}
+.box{
+    width: 80vw;
+    height: 400px;
+    overflow: scroll;
+    margin: 0 auto;
+    border: 2px solid honeydew;
+    border-radius: 10px;
+    background-color: wheat;
+}
+.box::-webkit-scrollbar {display:none}
+header{
+    width: 80vw;
+    height: 40px;
+    line-height: 37px;
+    /* background-color: wheat; */
+}
+input{
+    width: 25vw;
+    height: 25px;
+    margin: 0 3vw;
+    line-height: 25px;
+    outline: none;
+    border: 1px solid yellowgreen;
+    border-radius: 4px;
+    font-size: 20px;
+    padding: 0;
+    vertical-align: middle;
+    
+}
+.normalText{
+    width: 5vw;
+    height: 30px;
+    line-height: 30px;
+}
+button{
+    margin-left: 3vw;
+    width: 60px;
+    height: 25px;
+    vertical-align: middle;
+    background-color: rosybrown;
+    outline: none;
+    border: none;
+}
+button:hover{
+    background-color: red;
+}
+tr,tbody{
+    font-size: 30px;  
+}
+tr{
+    height: 40px;
+    line-height: 40px;
+    
+}
+td,th{
+    width: 20vw;
+    height: 40px;
+    text-align: center;
+}
+.fnKey{
+    /* border: 1px solid goldenrod; */
+}
+table{
+    border: 1px solid honeydew;
+    /* border-radius: 3px; */
+}
+table tbody:nth-child(odd)>tr{
+background-color: antiquewhite;
+}
+table tbody:nth-child(even) >tr{
+background-color: #cce5ff;
+}
+table tbody>tr:hover{
+background-color:rgb(185, 207, 59);
+}
+table tbody:nth-child(odd)>tr:hover{
+background-color: #2cb7da;
+}
+.functionModule{
+    position: fixed;
+    width: 8vw;
+    height: 400px;
+    cursor: context-menu;
+}
+#functionButton{
+    display: block;
+    width: 6vw;
+    margin: 0 auto;
+    height: 20px;
+    line-height: 20px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: darkkhaki;
+    text-align: center;
+    
+}
+#functionButton:hover{
+    border: 1px solid slateblue;
+    background: #03e9f4;
+    color: #fff;
+    border-radius: 5px;
+}
+.functionBox{
+    width: 8vw;
+    height: 380px;
+    display: none;
+}
+.functionModuleKid{
+    width: 7vw;
+    height: 40px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 40px;
+    font-size: 30px;
+    margin-top: 83px; 
+    border: 1px solid white;
+    background-color: bisque;  
+}
+.functionModuleKid:hover{
+    border: 1px solid violet;
+    border-radius: 2px;
+}

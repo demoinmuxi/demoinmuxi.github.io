@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management</title>
+    <script src="vue.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <h1>Library Management</h1>
+    <div class="functionModule" onselectstart="return false">
+        <span id="functionButton"  @click="functionShow">功能栏</span>
+        <div class="functionBox">
+            <div class="functionModuleKid MultiSelect" @click="multiSelect">多选</div>
+            <div class="functionModuleKid SelectAll" @click='selectAll'>全选</div>
+            <div class="functionModuleKid DeleteItem" @click='deleteItem'>删除</div>
+
+        </div>
+    </div>
+    <div class="box" id='bookReco' v-cloak>
+        <header>
+            <span class="normalText">编号:</span><input type="text" name="" id="" spellCheck="false" v-model='id' >
+            <span class="normalText">名称:</span><input type="text" name="" id="" spellCheck="false" v-model='name'>
+            <button @click='submit'>{{handleName}}</button>
+        </header>
+        <table >
+             <thead>
+                 <tr>
+                     <th>编号</th> <th>名称</th> <th>时间</th> <th>操作</th>
+                 </tr> 
+            </thead> 
+            <tbody v-for="(i,index) in books">   
+                <!-- <book-item   :id='i.id' :name='i.name' :date='i.date'></book-item> -->
+                <tr>
+                    <td>{{i.id}}</td> 
+                    <td>{{i.name}}</td> 
+                    <td>{{i.date}}</td> 
+                    <td class="fnKey">
+                       <a href="" @click.prevent='toEdit(i.id,index)'>修改</a> 
+                       <span>|</span> <a href="" @click.prevent='delBook(index)'>删除</a> 
+                   </td>
+               </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>功能栏</td>
+                    <td>多选</td>
+                    <td>全选</td>
+                    <td>删除</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+<script>
+    // var multiSelectButton=document.querySelector(".MultiSelect");
+    // var selectAllButton=document.querySelector(".SelectAll");
+    // var deleteButton=document.querySelector(".DeleteItem");
+    Vue.component("book-item", {
+        props:['id','name','date'],
+        template:`
+        
+        
+        `
+
+    });
+    var fuV=new Vue({
+        el:'.functionModule',
+        data:{
+            
+        },
+        methods:{
+            functionShow:function(){
+                var box = document.querySelector(".functionBox");
+                var showButton=document.querySelector("#functionButton");
+                if (showButton.innerHTML=="功能栏") {
+                    box.style.display="block";
+                    showButton.innerHTML="收起";
+                }else{
+                    box.style.display="none";
+                    showButton.innerHTML="功能栏";
+                }
+                
+
+            },
+            multiSelect:function(){
+                var multiSelectButton=document.querySelector(".MultiSelect");
+                multiSelectButton.style.backgroundColor='red';
+            },
+            selectAll:function(){
+                var selectAllButton=document.querySelector(".SelectAll");
+                selectAllButton.style.backgroundColor='red';
+
+            },
+            deleteItem:function(){
+                var deleteButton=document.querySelector(".DeleteItem");
+                deleteButton.style.backgroundColor='red';
+            }
+
+        },
+    });
+    var v=new Vue({
+        el:"#bookReco",
+        data: {
+            id:'',
+            name:'',
+            date:'',
+            handleName:"提交",
+            modifyIndex:0,
+            modifyOrsubmit:true,
+            books:[
+            {id: 1, name: '三国演义', date: '' },
+            {id: 2, name: '水浒传', date: '' },
+            {id: 3, name: '红楼梦', date: '' },
+            {id: 4, name: '西游记',date:'' }
+            ],
+        },
+        methods: {
+            toEdit:function(id,index){
+                this.modifyIndex=index;
+                this.modifyOrsubmit=false;
+                var book=this.books.filter(function(one) {
+                    return id==one.id; 
+                });
+                this.id=book[0].id;
+                this.name=book[0].name;
+                this.date=book[0].date;
+                this.handleName="修改";
+            },
+            submit:function() {
+                if (this.id==''||this.name=='') {
+                    alert("编号或内容不能为空");
+                }else{
+                    if (this.id.length>8||this.name.length>8) {
+                        alert("编号或书名过长");
+                    }else{
+                        if(this.modifyOrsubmit){
+                        var book={};
+                        book.id=this.id;
+                        book.name=this.name;
+                        book.date=this.date;
+                        // var viceBook=new Object;
+                        // viceBook=book;
+                        // console.log(book,this.id,this.name);
+                        // Vue.set(this.books,this.books.length,book);
+                        // Object.assign(viceBook,book);
+                        // var t={
+                        //     id:this.id,name:this.name,date:this.date
+                        // }
+                        // var m=0;
+                        // var d=new Array(0,8);
+                        // d.push(m);
+                        // m=1;
+                        // console.log(d[2]);
+                        // this.books.push(t);
+                        this.books.push(book);
+                        // book.id='';
+                        // book.name='';
+                        // book.date='';
+                        this.id='';
+                        this.name='';
+                        this.date='';
+                        
+                    }else{
+                        this.modify(this.modifyIndex);
+                    }
+
+                
+                }
+                
+
+                    }
+                    
+            },
+            delBook:function(index){
+                this.books.splice(index,1);
+                // var len=this.books.length;
+                // for (var i = 0; i < len; i++) {
+                //     
+                    
+                // }
+
+            },
+            modify:function(val){
+                var book={};
+                book.id=this.id;
+                book.name=this.name;
+                book.date=this.date;
+                // this.books.splice(val,1,book);
+                // Vue.set(this.books,val,book);
+                this.books[val].id=this.id;
+                this.books[val].name=this.name;
+                this.id='';
+                this.name='';
+                this.date='';
+                this.handleName="提交";
+                this.modifyOrsubmit=true;
+
+            },
+            
+        },
+    });
+</script>
+</html>
