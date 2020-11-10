@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>编写一个 range 函数，接受两个参数： start 和 end ，然后返回包含 start 到 end （包 括 end ）之间的所有数字。
+        接着，编写一个 sum 函数，接受一个数字数组，并返回所有数字之和。运行示例程序，检查 一下结果是不是 55。
+        附加题是修改 range 函数，接受第 3 个可选参数，指定构建数组时的步长（ step ）。如果 没有指定步长，构建数组时，每步增长 1，和旧函数行为一致。调用函数 range(1, 10, 2) ， 应该返回 [1, 3, 5, 7, 9] 。
+        另外确保步数值为负数时也可以正常工作，因 此 range(5, 2, -1) 应该产生 [5, 4, 3, 2] 。
+    </div>
+    <textarea id="q1" rows="20" cols="200" ></textarea>
+    <hr>
+    <div>数组有一个 reverse 方法，它可以逆转数组中元素的次序。在本题中，编写两个函 数， reverseArray 和 reverseArrayInPlace 。第一个函数 reverseArray 接受一个数组作为参 数，返回一个新数组，并逆转新数组中的元素次序。第二个函数 reverseArrayInPlace 与第一 个函数的功能相同，但是直接将数组作为参数进行修改来，逆转数组中的元素次序。两者都 不能使用标准的 reverse 方法。</div>
+    <textarea id="q2" rows="20" cols="200"></textarea>
+    <hr>
+    <div>编写一个函数 arrayToList ，当给定参数 [1, 2, 3] 时，建立一个和示例相似的数据结构。然 后编写一个 listToArray 函数，将列表转换成数组。再编写一个工具函数 prepend ，接受一个 元素和一个列表，然后创建一个新的列表，将元素添加到输入列表的开头。最后编写一个函69
+        四、数据结构：对象和数组 数 nth ，接受一个列表和一个数，并返回列表中指定位置的元素，如果该元素不存在则返 回 undefined 
+        如果你觉得这都不是什么难题，那么编写一个递归版本的 nth 函数。</div>
+    <textarea id="q3" rows="20" cols="200"></textarea>
+    <hr>
+    <script id="q1d">
+        var range=function(start,end){
+            var value=[];
+            for(var i=start;i<=end;i++){
+                value.push(i);
+            }
+            return value;
+        }
+        var sum=function(array){
+            var result=0;
+            for (let i = 0; i < array.length; i++) {
+                result+=array[i];
+            }
+            return result;
+        }
+        var superRange=function(start,end,step){
+            var absstep=Math.abs(step);
+            var value=[];
+            var rstart=start>end?end:start;
+            var rend=start<end?end:start;
+            for (let i = rstart; i < rend; i+=absstep) {
+                value.push(i);
+            }
+            if (step!=absstep) {
+                value=value.reverse();
+            }
+            return value;
+
+        }
+        // 测试
+        console.log("四 数据结构:对象和数组");
+        console.log("习题1");
+        console.log(sum(range(1,100)));
+        console.log(superRange(1,11,2));
+        console.log(superRange(11,1,-1));
+        console.log(sum([1,2,3,3]));
+    </script>
+    <script>
+        var q1=document.querySelector("#q1d");
+        var q1t=document.querySelector("#q1");
+        q1t.innerHTML=q1.innerHTML;
+    </script>
+    <script id="q2d">
+        var  reverseArray=function(array){
+            for(var i=0;i<array.length/2;i++){
+                array[i]+=array[array.length-1-i];
+                array[array.length-1-i]=array[i]-array[array.length-1-i];
+                array[i]-=array[array.length-1-i];
+            }
+            
+            return array;
+        }
+        var  reverseArrayInPlace=function(arr){
+            var array=[];
+            array=arr.slice();
+            for(var i=0;i<array.length/2;i++){
+                array[i]+=array[array.length-1-i];
+                array[array.length-1-i]=array[i]-array[array.length-1-i];
+                array[i]-=array[array.length-1-i];
+            }
+            return array;
+        }
+        //测试
+        console.log("习题2");
+        var arr=[10,2,4,2,2,2,3,1];
+        console.log(reverseArrayInPlace(arr));
+        console.log(arr);
+        reverseArray(arr);
+        console.log(arr+"\n已逆转\n逆转回来\n"+reverseArray(arr));
+    </script>
+    <script>
+        var q2=document.querySelector("#q2d");
+        var q2t=document.querySelector("#q2");
+        q2t.innerHTML=q2.innerHTML;
+    </script>
+    <script id="q3d">
+        var arrayToList=function(arr){
+            var obj={
+                v:0,list:{},
+            }
+            var listindex=obj;
+            for(var i=0;i<arr.length;i++){
+                listindex.v=arr[i];
+                listindex.list={};
+                listindex=listindex.list;
+            }
+            return obj;
+        }
+        var listToArray=function(obj){
+            var arr=[];
+            var index=0;
+            var sonobj=obj;
+            while (typeof sonobj.v!=="undefined") {
+                arr[index++]=sonobj.v;
+                sonobj=sonobj.list;
+            }
+            return arr;
+        }
+        var prepend=function(ele,obj){
+            var fobj={
+                v:0,list:{}
+            }
+            fobj.v=ele;
+            fobj.list=obj;
+            return fobj;
+        }
+        var nth=function(obj,n){
+            var arr=listToArray(obj);
+            return arr[n-1];
+        }
+        var dgnth=function(obj,n,result){
+                // console.log(result,n);
+            var sonobj=obj;
+            if(n==1&&typeof result==="undefined"){
+                return sonobj.v;
+            }                
+            if (typeof sonobj.v!=="undefined"&&(n>1)) {
+            dgnth(sonobj.list,n-1,sonobj.v);
+            console.log(result,n,"==");
+            }else if(n==1){
+                console.log(result,n,"---");
+                return result; 
+            }else{
+                console.log(result,n,"++");
+                return undefined;
+                
+                }
+        }
+        // 测试
+        console.log(arrayToList([1,1,4,2,9]));
+        console.log(listToArray(arrayToList([1,1,4,2,9])));
+        console.log (prepend(100,arrayToList([1,1,4,2,9])));
+        console.log(nth(arrayToList([1,1,4,2,9]),5),nth(arrayToList([1,1,4,2,9]),10));
+        var j=dgnth(arrayToList([1,1,4,2,9]),1);
+        var h=dgnth(arrayToList([1,1,4,2,9]),10);
+        var k=dgnth(arrayToList([1,1,4,2,9]),4);
+        console.log(j,h,k);
+    </script>
+    <script>
+        var q3=document.querySelector("#q3d");
+        var q3t=document.querySelector("#q3");
+        q3t.innerHTML=q3.innerHTML;
+    </script>
+</body>
+<style>
+    textarea{
+        resize: none;
+        border: none;
+        height: 500px;
+    }
+</style>
+</html>
