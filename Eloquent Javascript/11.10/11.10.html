@@ -138,7 +138,13 @@
                 return sonobj.v;
             }                
             if (typeof sonobj.v!=="undefined"&&(n>1)) {
-            dgnth(sonobj.list,n-1,sonobj.v);
+            // var ifr=
+            return  dgnth(sonobj.list,n-1,sonobj.v);
+            // if (ifr=="undefined") {
+                
+            // }else{
+            //     return ifr;
+            // }
             console.log(result,n,"==");
             }else if(n==1){
                 console.log(result,n,"---");
