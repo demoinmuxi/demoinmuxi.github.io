@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>联合使用 reduce 方法和 concat 方法，将一个数组的数组“展开”成一个单个数组，包含原始数 组的所有元素。
+    </div>
+    <textarea id="q1" rows="20" cols="200" spellcheck="false" style="height: 150px;"></textarea>
+    <hr>
+    <div>编写一个高阶函数 loop ，提供类似 for 循环语句的东西。
+         它接受一个值，一个测试函数， 一个更新函数和一个主体函数。
+         每次迭代中，它首先在当前循环值上运行测试函数，并在返 回 
+         false 时停止。 然后它调用主体函数，向其提供当前值。 最后，
+         它调用 update 函数来创 建一个新的值，并从头开始。 
+         定义函数时，可以使用常规循环来执行实际循环。</div>
+    <textarea id="q2" rows="20" cols="200" spellcheck="false" style="height: 220px;"></textarea>
+    <hr>
+    <div>
+        类似于 some 方法，数组也有 every 方法。 当给定函数对数组中的每个元素返回 true 时，
+        此 函数返回 true 。 在某种程度上， some 是作用于数组的 || 运算符的一个版本， 
+        every 就 像 && 运算符。 将 every 实现为一个函数，接受一个数组和一个谓词函数作为参数。
+        编写两个版本，一个使 用循环，另一个使用 some 方法。
+    </div>
+    <textarea id="q3" rows="20" cols="200" spellcheck="false" style="height: 300px;"></textarea>
+    <hr>
+</body>
+<style>
+    textarea{
+        resize: none;
+        border: none;
+        height: 500px;
+    }
+</style>
+<script>
+</script>
+<script id="q1d">
+    var arr1=[[1,2,3],[4,5,6],[7,8,9]];
+    function reduceAndConcat(arr){
+        return arr.reduce((a,b)=>a.concat(b),[]);
+    }
+    console.log("第5章高阶函数习");
+    console.log("习题1");
+    console.log(reduceAndConcat(arr1));
+</script>
+<script>
+    var q1=document.querySelector("#q1d");
+    var q1t=document.querySelector("#q1");
+    q1t.innerHTML=q1.innerHTML;
+</script>
+<script id="q2d">
+    function loop(value,testfn,update,main){
+        var viceValue=value;
+        var testTemp=testfn(value);
+        while (testTemp) {
+            main(viceValue);
+            viceValue=update(viceValue);
+            testTemp=testfn(viceValue);
+        }
+
+    }
+    console.log("习题2");
+    loop(3, n => n > 0, n => n - 1, console.log);
+</script>
+<script>
+    var q2=document.querySelector("#q2d");
+    var q2t=document.querySelector("#q2");
+    q2t.innerHTML=q2.innerHTML;
+</script>
+<script id="q3d">
+    function every1(arr,test){
+        var flag=true;
+        for (let item of arr) {
+            test(item)?"":flag=false;
+        }
+        return flag;
+    }
+    function every2(arr,test){
+        return !arr.some((item)=> !test(item));
+    }
+    console.log("习题3");
+    console.log(every1([1,2,3,4,5],n=> n<10),every2([1,2,3,4,5],n=> n<10));
+    console.log(every1([1,2,31,4,5],n=> n<10),every2([1,2,31,4,5],n=> n<10));
+</script>
+<script>
+    var q3=document.querySelector("#q3d");
+    var q3t=document.querySelector("#q3");
+    q3t.innerHTML=q3.innerHTML;
+</script>
+</html>
