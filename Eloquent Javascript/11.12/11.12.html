@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>编写一个构造器 Vec ，在二维空间中表示数组。
+        该函数接受两个数字参数 x 和 y ，并将其 保存到对象的同名属性中。
+        向 Vec 原型添加两个方法： plus 和 minus ，它们接受另一个向量作为参数，分别返回两个 向量（一个是 this ，另一个是参数）的和向量与差向量。
+        向原型添加一个 getter 属性 length ，
+        用于计算向量长度，即点 (x,y) 与原点 (0,0) 之间的 距离。
+    </div>
+    <textarea id="q1" rows="20" cols="200" spellcheck="false" style="height: 400px;"></textarea>
+    <hr>
+    <div>写一个名为 Group 的类（因为 Set 已被占用）。 
+        像 Set 一样，它具 有 add ， delete 和 has 方法。 
+        它的构造器创建一个空的分组， 
+        add 给分组添加一个值（但 仅当它不是成员时）， 
+        delete 从组中删除它的参数（如果它是成员）， 
+        has 返回一个布尔 值，表明其参数是否为分组的成员。 
+        使用 === 运算符或类似于 indexOf 的东西来确定两个值是否相同。 
+        为该类提供一个静态的 from 方法，该方法接受一个可迭代的对象作为参数，并创建一个分 组，包含遍历它产生的所有值。
+    </div>
+    <textarea id="q2" rows="20" cols="200" spellcheck="false" style="height: 700px;"></textarea>
+    <hr>
+    <div>
+        使上一个练习中的 Group 类可迭代
+    </div>
+    <textarea id="q3" rows="20" cols="200" spellcheck="false" style="height: 250px;"></textarea>
+    <hr>
+    <div>
+        在本章前面我提到，当你想忽略原型的属性时，
+        对象的 hasOwnProperty 可以用作 in 运算符 的更强大的替代方法。 
+        但是如果你的映射需要包含 hasOwnProperty 这个词呢？ 
+        你将无法再调 用该方法，因为对象的属性隐藏了方法值。 
+        你能想到一种方法，对拥有自己的同名属性的对象，调用 hasOwnProperty 吗？
+    </div>
+    <textarea id="q4" rows="20" cols="200" spellcheck="false" style="height: 250px;"></textarea>
+    <hr>
+</body>
+<style>
+    textarea{
+        resize: none;
+        border: none;
+        height: 500px;
+    }
+</style>
+<script id="q1d">
+    class Vec{
+        constructor(x,y){
+            this.x=x;
+            this.y=y;
+        }
+        get length(){
+            return Math.sqrt(this.x**2+this.y**2);
+        }
+    }
+    Vec.prototype.plus=function(obj){
+        return new Vec(this.x+obj.x,this.y+obj.y);
+    }
+    Vec.prototype.minus=function(obj){
+        return new Vec(this.x-obj.x,this.y-obj.y);
+    }
+    console.log("第六章");
+    console.log("第一题");
+    console.log(new Vec(1, 2).plus(new Vec(2, 3)));
+    console.log(new Vec(1, 2).minus(new Vec(2, 3)));
+    console.log(new Vec(3, 4).length);
+</script>
+<script>
+    var q1=document.querySelector("#q1d");
+    var q1t=document.querySelector("#q1");
+    q1t.innerHTML=q1.innerHTML;
+</script>
+<script id="q2d">
+    class Group{
+        constructor(arr){
+            this.arr=arr;
+        }
+        add(i){
+            if (!this.arr.some(n=> n===i)) {
+                this.arr.push(i);
+            }
+        }
+        delete(i){
+            this.has(i)&&(function(){for(let item = 0; item < this.arr.length; item++) {
+                                        if (this.arr[item]===i) {
+                                            this.arr.splice(item,1);
+                                            item--;
+                                        } 
+                                    }
+                        });
+        }
+        has(i){
+            return this.arr.some(n=>n===i);
+        }
+    }
+    Group.from=(obj)=>{
+            var arr=[];
+            for (var i of obj) {
+                arr.push(i);
+            }
+            return new Group(arr);
+        }
+    let group = Group.from([10, 20]); 
+    console.log("第二题");
+    console.log(group.has(10));
+    // → true 
+     console.log(group.has(30));
+    // → false 
+    group.add(10); 
+    group.delete(10); 
+    console.log(group.has(10));
+    //false
+</script>
+<script>
+    var q2=document.querySelector("#q2d");
+    var q2t=document.querySelector("#q2");
+    q2t.innerHTML=q2.innerHTML;
+</script>
+<script id='q3d'>
+    class group1 extends Group{
+    }
+    group1.from=(obj)=>{
+        var arr=[];
+            for (var i of obj) {
+                arr.push(i);
+            }
+            return arr;
+    }
+    // 没太明白题目描述,,,这样算是能实现题目要的打印叭...
+    console.log("第三题");
+    for (let value of group1.from(["a", "b", "c"])) {
+         console.log(value); 
+    }
+</script>
+<script>
+    var q3=document.querySelector("#q3d");
+    var q3t=document.querySelector("#q3");
+    q3t.innerHTML=q3.innerHTML;
+</script>
+<script id="q4d">
+    let map = {one: true, two: true, hasOwnProperty: true};
+    function solveMeathod(obj,i) {
+        var temp=obj.hasOwnProperty;
+        delete obj.hasOwnProperty;
+        var value=obj.hasOwnProperty(i);
+        obj.hasOwnProperty=temp;
+        return value;
+    }
+    console.log("第四题");
+    // 或者不封装成函数就能直接调用hsOwnProperty了
+    console.log(solveMeathod(map,"one"));
+</script>
+<script>
+    var q4=document.querySelector("#q4d");
+    var q4t=document.querySelector("#q4");
+    q4t.innerHTML=q4.innerHTML;
+</script>
+</html>
