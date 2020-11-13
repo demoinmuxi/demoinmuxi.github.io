@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        假设有一个函数 primitiveMultiply ，在 20% 的情况下将两个数相乘，
+        在另外 80% 的情况下 会触发 MultiplicatorUnitFailure 类型的异常。
+        编写一个函数，调用这个容易出错的函数，不 断尝试直到调用成功并返回结果为止。 
+        确保只处理你期望的异常。
+    </div>
+    <textarea id="q1" rows="20" cols="200" spellcheck="false" style="height: 400px;"></textarea>
+    <hr>
+    <div>
+        编写一个名为 withBoxUnlocked 的函数，接受一个函数类型的参数，其作用是解锁箱子，
+        执行 该函数，无论是正常返回还是抛出异常，在 withBoxUnlocked 函数返回前都必须锁上箱子。
+    </div>
+    <textarea id="q2" rows="20" cols="200" spellcheck="false" style="height: 600px;"></textarea>
+    <hr>
+</body>
+<style>
+    textarea{
+        resize: none;
+        border: none;
+        height: 500px;
+    }
+</style>
+<script id="q1d">
+    class MultiplicatorUnitFailure extends Error {}
+    function primitiveMultiply(a, b) {
+         if (Math.random() < 0.2) { 
+             return a * b; 
+            } else { 
+                throw new MultiplicatorUnitFailure(); 
+            } 
+        }
+        function reliableMultiply(a, b) { 
+            w: while (1) {
+                try {
+                    return primitiveMultiply(a,b);
+                } catch (e) {
+                    if (e instanceof MultiplicatorUnitFailure) {
+                        continue;
+                        // 非必要代码
+                    }
+                }
+                
+            }
+        }
+        console.log("第8章");
+        console.log("习题1");
+        console.log(reliableMultiply(8, 8));
+
+</script>
+<script>
+    var q1=document.querySelector("#q1d");
+    var q1t=document.querySelector("#q1");
+    q1t.innerHTML=q1.innerHTML;
+</script>
+<script id="q2d">
+const box = {
+     locked: true, 
+     unlock() {
+          this.locked = false; 
+        }, 
+    lock() {
+         this.locked = true; 
+        }, 
+    _content: [], 
+    get content() {
+         if (this.locked) throw new Error("Locked!"); 
+         return this._content; 
+        } 
+    };
+    function withBoxUnlocked(body) {
+         try{
+            body(); 
+         }catch(e){
+            //  题目意思，，，就这？？
+        }finally{
+             box.lock();
+         }
+        }
+    withBoxUnlocked(function() {
+        box.content.push("gold piece"); 
+    }); 
+    try {
+         withBoxUnlocked(function() {
+              throw new Error("Pirates on the horizon! Abort!"); 
+        }); 
+        } catch (e) {
+        console.log("Error raised:", e); 
+        }
+    console.log("习题2");
+    console.log(box.locked);
+</script>
+<script>
+    var q2=document.querySelector("#q2d");
+    var q2t=document.querySelector("#q2");
+    q2t.innerHTML=q2.innerHTML;
+</script>
+</html>
