@@ -8,6 +8,7 @@
 }
 .noneit{
     display: inline-block;
+    
 }
 .a{
     display: block;
@@ -30,6 +31,12 @@
 .listarea{
     overflow: scroll;
     height: 70vh;
+}
+.listarea::-webkit-scrollbar{
+    display: none;
+}
+body::-webkit-scrollbar{
+    display: none;
 }
 .noneit{
     display: none;
@@ -87,6 +94,9 @@
     vertical-align: top;
     margin-left: -8px;
 }
+.add:hover{
+    background: rgb(255,197,68);
+}
 #search{
     display: inline-block;
     width: 52vw;
@@ -98,4 +108,39 @@
 }
 h1{
     margin-bottom: 20px;
+}
+#delii:hover{
+    background: rgb(255,197,68);
+}
+.clear{
+    position: fixed;
+    top: 200px;
+    right: 25px;
+    width: 100px;
+    height: 50px;
+}
+@keyframes ccc{
+    0%{
+        opacity: 0.1;
+    }
+    50%{
+        opacity: 1.0;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+.clear div{
+    display: block;
+    text-decoration: none;
+    font-size: 15px;
+    color: black;
+    border-radius: 10px;
+    text-align: center;
+    width: 120px;
+    height: 25px;
+    line-height: 25px;
+    margin-top: 20px;
+    border: 1px solid black;
+    cursor: pointer;
 }

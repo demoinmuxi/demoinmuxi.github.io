@@ -6,8 +6,16 @@
     <title>Document</title>
     <script src="vue.js"></script>
 </head>
-<body onselectstart ='return false'>
+<body onselectstart ='return false' >
  <div id='todo'>
+     <div class="clear" >
+         <div class="delall" @mouseenter="delover" @mouseleave="delleave" @click="clearall">
+             clear all lists
+         </div>
+         <div class="back" @click="back" @mouseenter="backover" @mouseleave="backleave">
+             回到顶部
+         </div>
+     </div>
      <h1>The To Do List</h1>
      <div>Use CSS and JavaScript to create a "to-do list" to organize and prioritize your tasks.</div>
      <div class="inputred">
@@ -30,6 +38,35 @@
 
  </div>   
 </body>
+<script>
+    document.body.addEventListener("click",function(e){
+        var left=e.pageX;
+        var top=e.pageY;
+        var ec=document.createElement('span');
+        ec.innerHTML="冲冲冲！！！";
+        ec.style.display="block";
+        ec.style.width="30px";
+        ec.style.height="20px";
+        ec.style.fontSize="10px";
+        ec.style.color="pink";
+        ec.style.whiteSpace='nowrap';
+        ec.style.position="absolute";
+        ec.style.left=left+5+'px';
+        ec.style.top=top-10+'px';
+        ec.style.cursor="pointer";
+        // ec.className="w2";
+        ec.style.animation="ccc 1.2s 1 ease-in-out"
+        document.body.appendChild(ec);
+        setTimeout(() => {
+            document.body.removeChild(ec);
+        }, 1150);
+
+    });
+    var fatherE=document.querySelector("#todo");
+    var list=document.querySelector(".listarea");
+    var back=fatherE.querySelector(".back");
+    
+</script>
 <script>
       var eles=document.querySelectorAll(".deleteline");
       var melength=eles.length;
@@ -93,7 +130,7 @@
         },
         template:`
         <div :style="{background:colors[tt]}" :class='del?"noneit":""' >
-            <span style="display:inline-block;width:5vw;height:43px;lineHeight:43px;fontSize:20px;cursor: pointer; " :class='t?"showit":"hidit"' @click='deal' :class='del?"noneit":""' >
+            <span style="display:inline-block;width:5vw;height:43px;lineHeight:43px;fontSize:20px;cursor: pointer; " :class='' @click='deal'  >
                 √
                 </span>
            
@@ -117,6 +154,7 @@
         target1:"挣它一个亿",
         num:0,
         count:0,
+        del:false,
         todolistvalue:[
         {t:"1",addit:true,id:0},
         {t:"1",addit:true,id:0},
@@ -548,17 +586,28 @@
     },
     methods:{
         add:function(){
-            var s=this;
-            s.todolistvalue[s.num].t=s.text1;
-            s.todolistvalue[s.num].addit=false;
-            s.todolistvalue[s.num].id=s.num;
-            s.num++;s.count++;
+            if (!this.text1) {
+                alert("to do list 不能为空");
+            } else {
+                var s=this;
+                s.todolistvalue[s.num].t=s.text1;
+                s.todolistvalue[s.num].addit=false;
+                s.todolistvalue[s.num].id=s.num;
+                s.num++;s.count++;
+            }
+            
 
         },
         delall:function(){ 
             
             eles=document.querySelectorAll(".deleteline");
            var nowlength=eles.length;
+        //    for (let i = 0; i < this.num; i++) {
+        //        if (this.eles[i].style.display="none") {
+        //            nowlength--;
+        //        }
+               
+        //    }
             for (var i = 0; i < eles.length; i++) {
                 eles[i].parentElement.style.display="none";    
             }
@@ -573,16 +622,77 @@
             this.aaa=0;
 
         },
-        // deleteall:function(){
-        //     var doc=document.querySelectorAll("input");
-        //     for (var i = 1; i < num+1; i++) {
-        //         doc[i].parentElement.style.display="none";
-        //         // eles[i].parentElement.parentElement.style.background="tomato";
-
-        //     }
-        // }
-      
+        backover:function(){
+            var target=document.querySelector(".back");
+            target.style.background="rgb(255,197,68)";
+        },
+        backleave:function(){
+            var target=document.querySelector(".back");
+            target.style.background="none";
+        },
+        delover:function(){
+            var target=document.querySelector(".delall");
+            target.style.background="rgb(255,197,68)";
+        },
+        delleave:function(){
+            var target=document.querySelector(".delall");
+            target.style.background="none";
+        },
+        back:function(){
+            var list=document.querySelector(".listarea");
+            var h=list.scrollTop;
+            timer_1=setInterval(() => {
+                list.scroll(0,Math.floor(h-h/10));
+                h=Math.floor(h-h/10);
+                // console.log(h);
+                if (Math.floor(h)==0) {
+                    // console.log("jjj");
+                    clearInterval(timer_1); 
+                }
+            }, 15);
         
+    },
+    
+    clearall:function(){
+        if (this.del) {
+            location.reload();
+            alert("清空成功！！！");
+        }else{
+            this.del=true;
+            alert("确定要清空吗,5s内再次点击该按钮可清空");
+            // setTimeout(()=> {this.del=false;},5000);
+            var record=5;
+            var ele=document.querySelector(".delall");
+            var primary=ele.innerHTML;
+            var primary1=ele.style.fontSize;
+            ele.style.fontSize="5px";
+            var tm=setInterval(()=>{
+                
+                ele.innerHTML="再次点击可清空"+record;
+                record--;
+                if (record==-1) {
+                    clearInterval(tm);
+                    ele.innerHTML=primary;
+                    ele.style.fontSize=primary1;
+                    this.del=false;
+                }
+            },1000);
+            
+        }
+        
+    //     var listmap=document.querySelectorAll(".showit1");
+    //     for (let i = 0; i < this.num; i++) {
+    //         listmap[i].style.display='none';           
+    //     }
+    //     for ( i = 0; i < this.num; i++) {
+    //         this.todolistvalue[i].addit=false;
+    //         this.todolistvalue[i].t="";
+            
+            
+    //     }
+    //     this.count=0;
+    //     this.select=0;
+    }
     }
 });
 </script>
