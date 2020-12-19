@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="./tinyJQ(最新副本).js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="track">
+			
+		</div>
+		<div id="container">
+			<div id="visit01">
+				
+			</div>
+			<div id="visit02">
+				
+			</div>
+		</div>
+		<div id="container1">
+			<div id="visit011">
+				
+			</div>
+			<div id="visit021">
+				
+			</div>
+		</div>
+	</body>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#track{
+			position: relative;
+			top: 50px;
+			left: 100px;
+			width: 800px;
+			height: 400px;
+			border-radius: 50%;
+			border: 1px solid green;
+		}
+		#container,#container1{
+			position: absolute;
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			left: 495px;
+			top: 245px;
+			background: red;
+		}
+		#visit01,#visit011{
+			position: absolute;
+			left: -50px;
+			top:  -50px;
+			width: 30px;
+			height: 30px;
+			border-radius: 0 100%;
+			/* border: 1px solid royalblue; */
+		}
+		#visit02,#visit021{
+			position: absolute;
+			left: 30px;
+			top: 30px;
+			width: 30px;
+			height: 30px;
+			border-radius: 0 100%;
+			border: 1px solid royalblue;
+		}
+		#visit011{
+			clip-path: polygon(0 0,100% 50%,100% 100%,50% 100%);
+		}
+		#visit011,#visit021{
+			border:none;
+			border-radius: 0;
+			background-color: #0000FF;
+		}
+		#visit021{
+			clip-path: polygon(0 0,50% 0,100% 100%,0 50%);
+		}
+		#container,#container1{
+			transform-origin: center;
+		}
+		#container1{
+			background: blue;
+		}
+	</style>
+	<script type="text/javascript">
+		let colorarr=['#300','#f30','#e0f','#0ff','#666','#2e1'];
+		let rarr=colorarr.reverse();
+		$(document.body).css('transform','scale(0.6)');
+		let primaryleft=$('#container').css('left');
+		let primarytop=$('#container').css('top');
+		console.log(primaryleft,primarytop);
+		start=0;
+		var fn=(time)=>{
+			if(start===0){
+				start=time;
+			}else{
+				let change=time-start;
+				let arrindex=$random(0,5);
+				change=change/180*Math.PI/40;
+				let leftnow=495+400*Math.cos(change);
+				let topnow=245-200*Math.sin(change);
+				$('#visit01').css('background',colorarr[arrindex]);
+				$('#visit02').css('background',rarr[arrindex]);
+				$('#container').css({
+					'left':leftnow+'px',
+					'top':topnow+'px',
+					'transform':'rotate('+change*3000+'deg)',
+				});
+				let leftnow1=495-400*Math.cos(change);
+				let topnow1=245+200*Math.sin(change);
+				$('#visit011').css('background',colorarr[5-arrindex]);
+				$('#visit021').css('background',rarr[5-arrindex]);
+				$('#container1').css({
+					'left':leftnow1+'px',
+					'top':topnow1+'px',
+					'transform':'rotate('+change*3000+'deg)',
+				});
+			}
+			requestAnimationFrame(fn);
+		}
+		requestAnimationFrame(fn);
+	</script>
+</html>
