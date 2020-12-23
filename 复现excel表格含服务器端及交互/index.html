@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件审批记录表</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vxe-table/lib/style.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div id="header">
+        <header>
+            <span class="sheet">
+                <span>表单编号:</span><input type="text" v-model="number" class="uniinput1">
+            </span>
+            文件审批记录表
+        </header>
+        <div class="projectName">
+            项目名称:
+            <input type="text" v-model="projectname">
+        </div>
+    </div>
+    <div id="body">
+    <form action="POST">
+        <table border="2px" cellspacing="none">
+            <tbody>
+                <tr>
+                    <td>文件名称 </td>
+                    <td>
+                        <input type="text" name="filename" class="uniinput" v-model="filename">
+                    </td>
+                    <td>文件类别 </td>
+                    <td>
+                        <input type="text" name="filetype" class="uniinput1" v-model="typename">
+                    </td>
+                </tr>
+                <tr>
+                    <td>文件提供部门 </td>
+                    <td>
+                        <input type="text" name="department" class="uniinput" v-model="supplydepartment">
+                    </td>
+                    <td>主办人/日期</td>
+                    <td>
+                        <input type="date" name="date0" v-model="date0" class="unidate">
+                    </td>
+                </tr>
+                <tr>
+                    <td>组织评审部门 </td>
+                    <td>
+                        <input type="text" name="judgedepartment" class="uniinput" v-model="judgedepartment">
+                    </td>
+                    <td>主办人/日期</td>
+                    <td>
+                        <input type="date" name="date1" v-model="date1" class="unidate">
+                    </td>
+                </tr>
+                <tr>
+                    <td>附 件</td>
+                    <td colspan="3" class="special0">
+                        <input type="checkbox" name="none" v-model="none">无;
+                        <input type="checkbox" name="have" v-model="have">有,
+                        名称:
+                        <input type="text" name="vicefilename" class="uniinput1  uniline" v-model="vicefilename">
+                    </td>
+                </tr>
+                <tr class="special1">
+                    <td>主办部门</td>
+                    <td colspan="3" >情况说明</td>
+                </tr>
+                <tr>
+                    <td rowspan="1">
+                        <textarea name="maindepartment" id="" cols="12" rows="4" v-model="maindepartment"></textarea>
+                    </td>
+                    <td rowspan="1" colspan="3" class="special0">
+                        <textarea name="about0" id="" cols="110" rows="4" v-model="about0"></textarea>
+                        <div>
+                        <div class="special2"></div>
+                        主办人(签名/日期):
+                        <input type="text" name="mainpeople" class="uniinput1" v-model="mainpeople">
+                        </div>
+                    </td>
+                </tr>
+                <tr class="special1">
+                    <td>评审部门</td>
+                    <td colspan="3" >评审意见</td>
+                </tr>
+                <tr>
+                    <td rowspan="1">
+                        部门名称
+                        <div>
+                            (共<input type="text" style="width: 2em;" class="special3" name="departmentnumber0" v-model="departmentnumber0"></input>项)
+                        </div>
+                    </td>
+                    <td rowspan="1" colspan="3" class="special0">
+                        <textarea name="about1" id="" cols="110" rows="4" v-model="about1"></textarea>
+                        <div>
+                        <div class="special2"></div>
+                        评审人(签名/日期):
+                        <input type="text" name="judgepeople0" class="uniinput1" v-model="judgepeople0">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="1">
+                        部门名称
+                        <div>
+                            (共<input type="text" style="width: 2em;" class="special3" name="departmentnumber1" v-model="departmentnumber1"></input>项)
+                        </div>
+                    </td>
+                    <td rowspan="1" colspan="3" class="special0">
+                        <textarea name="about2" id="" cols="110" rows="4" v-model="about2"></textarea>
+                        <div>
+                        <div class="special2"></div>
+                        评审人(签名/日期):
+                        <input type="text" name="judgepeople1" class="uniinput1" v-model="judgepeople1">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="1">
+                        部门名称
+                        <div>
+                            (共<input type="text" style="width: 2em;" class="special3" name="departmentnumber2" v-model="departmentnumber2"></input>项)
+                        </div>
+                    </td>
+                    <td rowspan="1" colspan="3" class="special0">
+                        <textarea name="about3" id="" cols="110" rows="4" v-model="about3"></textarea>
+                        <div>
+                        <div class="special2"></div>
+                        评审人(签名/日期):
+                        <input type="text" name="judgepeople2" class="uniinput1" v-model="judgepeople2">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="1">
+                        部门名称
+                        <div>
+                            (共<input type="text" style="width: 2em;" class="special3" name="departmentnumber3" v-model="departmentnumber3"></input>项)
+                        </div>
+                    </td>
+                    <td rowspan="1" colspan="3" class="special0">
+                        <textarea name="about4" id="" cols="110" rows="4" v-model="about4"></textarea>
+                        <div>
+                        <div class="special2"></div>
+                        评审人(签名/日期):
+                        <input type="text" name="judgepeople3" class="uniinput1" v-model="judgepeople3">
+                        </div>
+                    </td>
+                </tr>
+                <tr class="special1">
+                    <td>审核人/部门</td>
+                    <td colspan="3" >审核意见</td>
+                </tr>
+                <tr>
+                    <td rowspan="1">
+                        <textarea name="judgepeoplex" id="" cols="12" rows="4" v-model="judgepeoplex"></textarea>
+                    </td>
+                    <td rowspan="1" colspan="3" class="special0">
+                        <textarea name="about5" id="" cols="110" rows="4" v-model="about5"></textarea>
+                        <div>
+                        <div class="special2"></div>
+                        审核人(签名/日期):
+                        <input type="text" name="judgepeoplexs" class="uniinput1" v-model="judgepeoplexs">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="5" class="specialwidth">文件修改记录</td>
+                    <td colspan="3" class="special0">
+                        <input type="checkbox" name="isok">
+                        <span>各评审/审核人/部门对文件无异议，请领导审批；</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="special0">
+                        <input type="checkbox" name="havemodify">
+                        <span>已根据评审意见对文件进行修改，请领导审批；</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="special0">
+                        <input type="checkbox" name="ifothers" v-model="ifothers">
+                        <span>其它:</span>
+                        <input type="text" name="others" id="" class="uniinput1 uniline" v-model="others">
+                        <span>。</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="special0">
+                        <span>主办人签字/日期:</span>
+                        <input type="text" name="signdate" id="" class="uniinput1  uniline">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="special0">
+                        <span>评审组织部门/单位负责人签字/日期:</span>
+                        <input type="text" name="signdate0" id="" class="uniinput1  uniline">
+                    </td>
+                </tr>
+                <tr class="special1">
+                    <td>审批人</td>
+                    <td colspan="3" >评审意见</td>
+                </tr>
+                <tr>
+                    <td rowspan="1">
+                        <textarea name="judgepeoplefinal" id="" cols="12" rows="4" v-model="judgepeoplefinal"></textarea>
+                    </td>
+                    <td rowspan="1" colspan="3" class="special0">
+                        <textarea name="about" id="" cols="110" rows="4"></textarea>
+                        <div>
+                        <div class="special4"></div>
+                        审批人(签名/日期):
+                        <input type="text" name="judgepeoplexsfinal" class="uniinput1" v-model="judgepeoplexsfinal">
+                        </div>
+                    </td>
+                </tr>
+            </tbody> 
+        </table>
+        <!-- <input type="submit" value="提交"> -->
+        <!-- 直接表单提交 -->
+    </form>
+    </div>
+    <footer>提交</footer>
+    <!-- 手动ajax提交 -->
+</body>
+<script src="vue.js"></script>
+<script src="index.js"></script>
+</html>

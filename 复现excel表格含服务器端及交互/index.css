@@ -1,0 +1,112 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: rgb(121, 121, 121);
+}
+#header,#body{
+    margin:0 auto;
+    background-color: rgb(255, 255, 255);
+}
+header{
+    position: relative;
+    font-family: "宋体";
+    font-weight: bold;
+    font-size: 22pt;
+    padding-top: 0.89cm;
+    width: 950px;
+    text-align: center;
+}
+.sheet{
+    position: absolute;
+    display: flex;
+    bottom: 0;
+    justify-self: start;
+    /* align-items: flex-end; */
+    /* 加上这行 表单编号下面的空白会消失 */
+}
+.sheet>span{
+    display: inline-block;
+    vertical-align: bottom;
+}
+.sheet>span,.sheet>input {
+    font-size: 10pt;
+    vertical-align: text-bottom;
+}
+.sheet>input{
+    width: 100px;
+}
+.projectName>input,.uniinput,.uniinput1,.special3{
+    width: 445px;
+    outline: none;
+    border: none;
+    border-radius: 0;
+}
+.uniinput1{
+    width: 220px;
+}
+.uniline{
+    border-bottom: 1px solid black;
+}
+.projectName{
+    margin-top: 25px;
+    font-size: 10.5pt;
+}
+#body table{
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+.unidate{
+    outline: none;
+    border: none!important;
+}
+tr>td{
+    font-size: 10.5pt;
+    text-align: center;
+    font-family: "宋体";
+    line-height: 1.5em;
+}
+.special0{
+    text-align: left;
+    text-indent: .5em;
+}
+.special1{
+    background:rgb(205,255,255);
+}
+.special2,.special4{
+    display: inline-block;
+    width: 390px;
+}
+.special3{
+    width: 2em;
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+.special4{
+    width: 300px;
+}
+textarea{
+    outline: none;
+    resize: none;
+    border: none;
+}
+.specialwidth{
+    line-height: 7.5em;
+}
+footer{
+    width: 200px;
+    margin:30px auto;
+    text-align: center;
+    background:linear-gradient(30deg,#e30 30%,#ee3 50%,#f99 70%,transparent);
+    clip-path: polygon(0 0,80% 0,100% 50%,80% 100%,0 100%);
+}
+#body,#header{
+    padding:0 1.98cm;
+}
+#body{
+    padding-bottom: 1.19cm;
+}
+#header{
+    margin-top: 20px;  
+}
