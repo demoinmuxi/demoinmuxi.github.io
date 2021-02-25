@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function isn(A, b) {
+        let p = A;
+        while (p) {
+            if (p === b) {
+                return true;
+            }
+            p = p.__proto__;
+        }
+        return false;
+
+    }
+    let tree = {
+        val: 1,
+        children: [
+            {
+                val: 2,
+                children: [
+                    {
+                        val: 3,
+                        children: [
+                            {
+                                val: 4,
+                                children: [],
+                            },
+                            {
+                                val: 44,
+                                children: [],
+                            }
+                        ],
+                    },
+                    {
+                        val: 33,
+                        children: [
+                            {
+                                val: 34,
+                                children: [],
+                            },
+                            {
+                                val: 344,
+                                children: [],
+                            }
+                        ],
+                    }
+                ],
+            },
+            {
+                val: 5,
+                children: [
+                    {
+                        val: 6,
+                        children: [
+                            {
+                                val: 7,
+                                children: [],
+                            }
+                        ],
+                    }
+                ],
+            },
+            {
+                val: 8,
+                children: [
+                    {
+                        val: 9,
+                        children: [
+                            {
+                                val: 10,
+                                children: [],
+                            },
+                            {
+                                val: 11,
+                                children: [],
+                            },
+                        ],
+                    },
+                    {
+                        val: 12,
+                        children: [
+                            {
+                                val: 13,
+                                children: [],
+                            },
+                            {
+                                val: 14,
+                                children: [],
+                            },
+                        ],
+                    },
+                ],
+            },
+        ]
+    }
+    function dg(r) {
+        if (r > 1000000) return r;
+        r *= r;
+        console.log(r);
+        return dg(r);
+    }
+    function mockdg(r) {
+        const stack = [r];
+        let res = r;
+        while (stack.length) {
+            if (res > 1000000) return res;
+            res *= stack.pop();
+            stack.push(res);
+        }
+    }
+    function mocksd(root) {
+        const stack = [root];
+        while (stack.length) {
+            // let child=stack.pop();
+            // console.log(child.val);
+            let child = stack.pop();
+            console.log(child.val);
+            let children = child.children.reverse();
+            for (let i = 0; i < children.length; i++) {
+                stack.push(children[i]);
+            }
+        }
+    }
+    const recordstack = [];
+    function sd(root, val) {
+        console.log(val);
+        root.children.forEach((r) => sd(r, r.val));
+    }
+    sd(tree);
+    console.log('--------');
+    mocksd(tree);
+    function gd(root) {
+        let queue = [root];
+        while (queue.length) {
+            let q = queue.shift();
+            console.log(q.val);
+            q.children.forEach(r => queue.push(r));
+        }
+    }
+    console.log('----');
+    gd(tree);
+    let bt = {
+        val: 1,
+        left: {
+            val: 2,
+            left: {
+                val: 3
+            },
+            right: {
+                val: 4,
+                left: {
+                    val: 1000000,
+                    left: { val: 5 },
+                    right: { val: 6 },
+                },
+                right: { val: 7 },
+            }
+        },
+        right: {
+            val: 8,
+            left: {
+                val: 9,
+            },
+            right: {
+                val: 10,
+                right: {
+                    val: 11,
+                }
+            }
+        },
+    }
+    function zhong(root) {
+        if (!root) return;
+        zhong(root.left);
+        console.log(root.val);
+        zhong(root.right);
+    }
+    function xian(root) {
+        if (!root) return;
+        console.log(root.val);
+        xian(root.left);
+        xian(root.right);
+    }
+    function mockxian(root) {
+        const stack = [root];
+        while (stack.length) {
+            let xian = stack.pop();
+            console.log(xian.val);
+            if (xian.right) stack.push(xian.right);
+            if (xian.left) stack.push(xian.left);
+        }
+    }
+    console.log('------');
+    xian(bt);
+    console.log('------');
+    mockxian(bt);
+    console.log('------');
+    function mockzhong(root) {
+        let p = root.left;
+        const stack = [root];
+        while (stack.length || p) {
+            while (p) {
+                stack.push(p);
+                p = p.left;
+            }
+            let left = stack.pop();
+            console.log(left.val);
+            p = left.right;
+        }
+
+    }
+    console.log('----');
+    zhong(bt);
+    console.log('----');
+    mockzhong(bt);
+    function hou(root) {
+        if (!root) return;
+        hou(root.left);
+        hou(root.right);
+        console.log(root.val);
+    }
+    function mockhou(root) {
+        //由mockxian改造;
+        //todo直接实现...尝试多次失败！！！
+        let stack=[root];
+        let p;
+        let arr=[];
+        while(stack.length){
+            p=stack.pop();
+            arr.push(p.val);
+            if(p.left) stack.push(p.left);
+            if(p.right) stack.push(p.right);
+        }
+        while(p=arr.pop()) console.log(p);
+    }
+    console.log('+++++');
+    hou(bt);
+    console.log('+++++');
+    mockhou(bt);
+</script>
+
+</html>
