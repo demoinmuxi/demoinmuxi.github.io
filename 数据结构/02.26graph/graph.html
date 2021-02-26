@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    let graph = {
+        0: [0, 2],
+        1: [2, 3, 4],
+        2: [1, 0],
+        3: [1],
+        4: [0],
+    }
+    let set = new Set();
+    let dfs = (n) => {
+        console.log(n);
+        set.add(n);
+        graph[n].forEach(r => {
+            if (!set.has(r)) {
+                dfs(r);
+            }
+        });
+
+    }
+    let mockdfs=(n)=>{
+        let stack=[n];
+        // let p=graph[n];
+        set.add(n);
+        while(stack.length){
+            let t=stack.pop();
+            console.log(t);
+            let p=graph[t];
+            for (let i = p.length-1; i >=0; i--) {
+                if(!set.has(p[i])){
+                    stack.push(p[i]);
+                    set.add(p[i]);
+                }
+            }
+        }
+    }
+    console.log('dfs');
+    dfs(1);
+    set.clear();
+    console.log('mockdfs');
+    mockdfs(1);
+    set.clear();
+    let bfs = (n) => {
+        let queue = [n];
+        set.add(n);
+        while (queue.length) {
+            let n = queue.shift();
+            console.log(n);
+            graph[n].forEach(r => {
+                if (!set.has(r)) {
+                    queue.push(r);
+                    set.add(r);
+                }
+            });
+        }
+    }
+    console.log('bfs');
+    bfs(1);
+    /^[eE]$/.test('e')
+</script>
+
+</html>
